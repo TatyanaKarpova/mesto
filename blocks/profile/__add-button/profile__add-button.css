@@ -1,0 +1,10 @@
+.profile__add-button {
+    align-self: center;
+    justify-self: end;
+    width: 150px;
+    height: 50px;
+}
+
+.profile__add-button:hover {
+    opacity: 0.6;
+}

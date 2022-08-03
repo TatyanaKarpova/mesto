@@ -1,0 +1,7 @@
+.profile {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    box-sizing: border-box;
+    color: #FFFFFF;
+}
