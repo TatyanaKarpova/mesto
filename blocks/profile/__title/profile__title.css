@@ -6,3 +6,17 @@
     grid-area: title;
     align-self: end;
 }
+
+@media screen and (max-width: 768px) {
+    .profile__title {
+        font-size: 35px;
+        line-height: 40px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .profile__title {
+        font-size: 27px;
+        line-height: 33px;
+    }
+}

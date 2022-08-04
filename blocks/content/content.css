@@ -5,3 +5,9 @@
     display: grid;
     row-gap: 50px;
 }
+
+@media screen and (max-width: 768px) {
+    .content {
+        margin-bottom: 57.5px;
+    }
+}

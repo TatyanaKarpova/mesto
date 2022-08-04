@@ -5,3 +5,11 @@
     box-sizing: border-box;
     color: #FFFFFF;
 }
+
+@media screen and (max-width: 768px) {
+    .profile {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        row-gap: 30px;
+    }
+}
