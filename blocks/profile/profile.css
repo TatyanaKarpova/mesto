@@ -2,7 +2,6 @@
     padding: 0;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    box-sizing: border-box;
     color: #FFFFFF;
 }
 
@@ -10,6 +9,6 @@
     .profile {
         grid-template-columns: 1fr;
         justify-items: center;
-        row-gap: 30px;
+        row-gap: 31px;
     }
 }

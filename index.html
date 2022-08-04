@@ -27,7 +27,7 @@
                     <img class="profile__edit-button" src="./images/edit-button.svg" 
                     alt="Кнопка редактировать">
                 </div>
-                <img class="profile__add-button" src="./images/add-button.svg" alt="Кнопка добавить">
+                <div class="profile__add-button"></div>
             </section>
             <section class="elements section content__section">
                 <ul class="elements__items page__list">
@@ -95,6 +95,16 @@
                 &copy;&nbsp;2020 Mesto Russia
             </p>
         </footer>
+    </div>
+    <div class="popup">
+        <form class="popup__container">
+            <h2 class="popup__heading">Редактировать профиль</h2>
+            <label for="name" class="popup__label"></label>
+            <input type="text" id="name" placeholder="Жак-Ив Кусто" class="popup__item popup__item-name">
+            <label for="occupation" class="popup__label"></label>
+            <input type="text" id="occupation" placeholder="Исследователь океана" class="popup__item popup__item-occupation">
+            <button type="submit" class="popup__button popup__button-submit">Сохранить</button>
+        </form>
     </div>   
 </body>
 
