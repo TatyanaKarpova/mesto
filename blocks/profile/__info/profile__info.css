@@ -7,7 +7,7 @@
     gap: 16px 18px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
     .profile__info {
         grid-template-columns: repeat(2, fit-content(100%));
     }

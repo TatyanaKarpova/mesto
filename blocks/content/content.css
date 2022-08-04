@@ -6,7 +6,7 @@
     row-gap: 50px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
     .content {
         margin-bottom: 57.5px;
     }
