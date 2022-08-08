@@ -2,7 +2,6 @@
     font-family: inherit;
     border: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-    outline: 0;
     box-sizing: border-box;
     width: 100%;
     padding: 0;
@@ -12,6 +11,10 @@
 .popup__item:first-of-type{
     margin-bottom: 30px;
 }
+
+.popup__item:focus {
+    outline-color: #87CEFA;
+  }
 
 .popup__item::placeholder {
     font-family: inherit;
