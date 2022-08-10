@@ -5,12 +5,19 @@
     line-height: 48px;
     grid-area: title;
     align-self: end;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 300px;
+    margin-left: 4px;
 }
 
 @media screen and (max-width: 1024px) {
     .profile__title {
         font-size: 35px;
         line-height: 40px;
+        max-width: 250px;
     }
 }
 
@@ -18,5 +25,7 @@
     .profile__title {
         font-size: 27px;
         line-height: 33px;
+        max-width: 190px;
+        margin-left: 25px;
     }
 }
