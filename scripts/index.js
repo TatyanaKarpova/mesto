@@ -1,12 +1,18 @@
 const popup = document.querySelector('.popup');
-const openButton = document.querySelector('.profile__edit-button_popup_opened');
-const closeButton = popup.querySelector('.popup__close-icon_popup_closed');
+const openButton = document.querySelector('.profile__edit-button');
+const closeButton = popup.querySelector('.popup__close-icon');
 
-const openPopup = function () {
+function openPopup () {
     popup.classList.add('popup_opened');
+    let nameInputElement = document.querySelector('.popup__item_input_name');
+    let occupationInputElement = document.querySelector('.popup__item_input_occupation');
+    nameInputElement.value = document.querySelector('.profile__title').textContent;
+    occupationInputElement.value = document.querySelector('.profile__subtitle').textContent;
+    console.log(nameInputElement.value);
+    console.log(occupationInputElement.value);
 }
 
-const closePopup = function () {
+function closePopup () {
     popup.classList.remove('popup_opened');
 }
 
@@ -15,18 +21,18 @@ closeButton.addEventListener('click', closePopup);
 
 
 let formElement = document.querySelector('.popup__form');
-let nameInputElement = document.querySelector('.popup__item_input_name');
-let occupationInputElement = document.querySelector('.popup__item_input_occupation');
+/*let nameInputElement = document.querySelector('.popup__item_input_name');
+let occupationInputElement = document.querySelector('.popup__item_input_occupation');*/
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
-    const name = nameInputElement.value;
-    const occupation = occupationInputElement.value;
+    const nameInput = document.querySelector('.popup__item_input_name').value;
+    const occupationInput = document.querySelector('.popup__item_input_occupation').value;
     const profileNameElement = document.querySelector('.profile__title');
-    profileNameElement.textContent = name;
     const profileOccupationElement = document.querySelector('.profile__subtitle');
-    profileOccupationElement.textContent = occupation;
-    popup.classList.remove('popup_opened');
+    profileNameElement.textContent = nameInput;
+    profileOccupationElement.textContent = occupationInput;
+    closePopup();
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
