@@ -8,8 +8,6 @@ function openPopup () {
     let occupationInputElement = document.querySelector('.popup__item_input_occupation');
     nameInputElement.value = document.querySelector('.profile__title').textContent;
     occupationInputElement.value = document.querySelector('.profile__subtitle').textContent;
-    console.log(nameInputElement.value);
-    console.log(occupationInputElement.value);
 }
 
 function closePopup () {
@@ -21,8 +19,6 @@ closeButton.addEventListener('click', closePopup);
 
 
 let formElement = document.querySelector('.popup__form');
-/*let nameInputElement = document.querySelector('.popup__item_input_name');
-let occupationInputElement = document.querySelector('.popup__item_input_occupation');*/
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
