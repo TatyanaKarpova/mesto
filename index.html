@@ -24,62 +24,9 @@
                 <button type="button" class="profile__add-button" aria-label="Add a new photo"></button>
             </section>
             <section class="elements section content__section">
-                <ul class="elements__items page__list">
-                    <li class="element">
-                        <img class="element__image" src="./images/cusco.jpg" alt="Изображение старого здания">
-                        <div class="element__bottom-item">
-                            <h2 class="element__text">
-                                Куско
-                            </h2>
-                            <button type="button" class="element__like" aria-label="Put a like"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img class="element__image" src="./images/sorrento.jpg" alt="Изображение озера в горах">
-                        <div class="element__bottom-item">
-                            <h2 class="element__text">
-                                Сорренто
-                            </h2>
-                            <button type="button" class="element__like" aria-label="Put a like"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img class="element__image" src="./images/lake-braies.jpg" alt="Изображение озера в горах (вид с лодки)">
-                        <div class="element__bottom-item">
-                            <h2 class="element__text">
-                                Озеро Брайес
-                            </h2>
-                            <button type="button" class="element__like" aria-label="Put a like"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img class="element__image" src="./images/glasgow.jpg" alt="Изображение лестницы со старыи зданием на фоне">
-                        <div class="element__bottom-item">
-                            <h2 class="element__text">
-                                Глазго
-                            </h2>
-                            <button type="button" class="element__like" aria-label="Put a like"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img class="element__image" src="./images/stockholm.jpg" alt="Изображение узкой арки">
-                        <div class="element__bottom-item">
-                            <h2 class="element__text">
-                                Стокгольм
-                            </h2>
-                            <button type="button" class="element__like" aria-label="Put a like"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img class="element__image" src="./images/skaly-seven-sisters.jpg" alt="Изображение скал в розовом закате">
-                        <div class="element__bottom-item">
-                            <h2 class="element__text">
-                                Скалы Севен-Систерс
-                            </h2>
-                            <button type="button" class="element__like" aria-label="Put a like"></button>
-                        </div>
-                    </li>
-                </ul>
+                <div class="elements__items">
+                    
+                </div>
             </section>
         </main>
         <footer class="footer section">
@@ -88,6 +35,7 @@
             </p>
         </footer>
     </div>
+
     <div class="popup">
         <div class="popup__container">
             <h2 class="popup__heading">Редактировать профиль</h2>
@@ -110,6 +58,19 @@
             <button type="button" class="popup__close-icon popup__close-icon_add_card" aria-label="Close the add form"></button>
         </div>
     </div>
+
+    <template class="card-element-template">
+        <article class="element">
+            <img class="element__image">
+            <div class="element__bottom-item">
+                <h2 class="element__text">
+                    
+                </h2>
+                <button class="element__like"></button>
+            </div>
+        </article>
+    </template>
+
     <script src="./scripts/index.js"></script> 
 </body>
 
