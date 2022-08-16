@@ -33,8 +33,6 @@ function formSubmitHandler (evt) {
 
 formElement.addEventListener('submit', formSubmitHandler);
 
-/*Добавление 6-ти карточек на страницу*/
-
 const cardElementsList = document.querySelector('.elements__items');
 const cardElementTemplate = document.querySelector('.card-element-template').content;
 
@@ -75,7 +73,7 @@ initialCardElements.forEach(function (element) {
 })
 
 /*Кнопки открытия/закрытия*/
-/*
+
 const popupAddCard = document.querySelector('.popup_add_card');
 const openAddCardFormButton = document.querySelector('.profile__add-button');
 const closeAddCardFormButton = document.querySelector('.popup__close-icon_add_card');
