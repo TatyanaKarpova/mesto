@@ -32,3 +32,18 @@ function formSubmitHandler (evt) {
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
+
+const popupAddCard = document.querySelector('.popup_add_card');
+const openAddCardFormButton = document.querySelector('.profile__add-button');
+const closeAddCardFormButton = document.querySelector('.popup__close-icon_add_card');
+
+const openAddCardForm = () => {
+    popupAddCard.classList.add('popup_opened_add_card_form');
+};
+
+const closeAddCardForm = () => {
+    popupAddCard.classList.remove('popup_opened_add_card_form');
+};
+
+openAddCardFormButton.addEventListener('click', openAddCardForm);
+closeAddCardFormButton.addEventListener('click', closeAddCardForm);

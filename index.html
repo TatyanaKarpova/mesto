@@ -99,15 +99,15 @@
             <button type="button" class="popup__close-icon" aria-label="Close the form"></button>
         </div>
     </div>
-    <div class="popup">
+    <div class="popup popup_add_card">
         <div class="popup__container">
             <h2 class="popup__heading">Новое место</h2>
-            <form name="popup-form-add-card" class="popup__form">
+            <form name="popup-form-add-card" class="popup__form popup__form_add_card">
                 <input type="text" id="card-name" name="card-name" placeholder="Название" class="popup__item popup__item_input_card_name" required>
-                <input type="url" id="photo-url" name="photo-url" placeholder="Ссылка на картинку" class="popup__item popup__item_input_photo_url" required>
-                <button type="submit" class="popup__button">Создать</button>
+                <input type="url" id="card-photo-url" name="card-photo-url" placeholder="Ссылка на картинку" class="popup__item popup__item_input_card_photo_url" required>
+                <button type="submit" class="popup__button popup__button_add_card">Создать</button>
             </form>
-            <button type="button" class="popup__close-icon" aria-label="Close the form"></button>
+            <button type="button" class="popup__close-icon popup__close-icon_add_card" aria-label="Close the add form"></button>
         </div>
     </div>
     <script src="./scripts/index.js"></script> 
