@@ -33,6 +33,7 @@ function formSubmitHandler (evt) {
 
 formElement.addEventListener('submit', formSubmitHandler);
 
+
 const cardElementsList = document.querySelector('.elements__items');
 const cardElementTemplate = document.querySelector('.card-element-template').content;
 
@@ -72,7 +73,6 @@ initialCardElements.forEach(function (element) {
     cardElementsList.prepend(cardElement);
 })
 
-/*Кнопки открытия/закрытия*/
 
 const popupAddCard = document.querySelector('.popup_add_card');
 const openAddCardFormButton = document.querySelector('.profile__add-button');
@@ -89,39 +89,26 @@ const closeAddCardForm = () => {
 openAddCardFormButton.addEventListener('click', openAddCardForm);
 closeAddCardFormButton.addEventListener('click', closeAddCardForm);
 
-/*Добавление карточки
 
 const formElementAddCard = document.querySelector('.popup__form_add_card');
-const cardElementsContainer = document.querySelector('.elements__items');
+const cardElementHeading = document.querySelector('.popup__item_input_card_name');
+const cardElementPhoto = document.querySelector('.popup__item_input_card_photo_url');
+
 
 function addCardElement () {
-    /*const cardNameInputValue = document.querySelector('.popup__item_input_card_name').value;
-    const cardElementContainer = document.createElement('li');
-    cardElementContainer.classList.add('element');
-    const cardImageElement = document.createElement('img');
-    cardImageElement.classList.add('element__image');
-    const cardBottomItemElement = document.createElement('div');
-    cardBottomItemElement.classList.add('element__bottom-item');
-    const cardHeadingElement = document.createElement('h2');
-    cardHeadingElement.classList.add('element__text');
-    cardHeadingElement.textContent = cardNameInputValue;
-    const cardButtonLikeElement = document.createElement('button');
-    cardButtonLikeElement.classList.add('element__like');
-    cardElementContainer.prepend(cardImageElement, cardBottomItemElement, cardHeadingElement, cardButtonLikeElement);
-    cardElementsContainer.prepend(cardElementContainer);*/
-    /*const cardElementTemplate = document.querySelector('#card-element-template').content;
-    const cardElement = document.querySelector('.element').cloneNode(true);
-    const cardNameInputValue = document.querySelector('.popup__item_input_card_name').value;
-    cardElement.querySelector('.element__text').textContent = cardNameInputValue;
-    const cardElementContainer = document.querySelector('.element');
-    cardElementContainer.prepend(cardElement);
+    const cardElement = cardElementTemplate.cloneNode(true);
+    cardElement.querySelector('.element__text').textContent = cardElementHeading.value;
+    cardElement.querySelector('.element__image').src = cardElementPhoto.value;
+    cardElementsList.prepend(cardElement);
 }
 
 function formSubmitHandlerAddCard (evt) {
     evt.preventDefault();
     addCardElement();
+    cardElementHeading.value = '';
+    cardElementPhoto.value = '';
     closeAddCardForm();
 }
 
 formElementAddCard.addEventListener('submit', formSubmitHandlerAddCard);
-*/
+
