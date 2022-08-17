@@ -64,11 +64,15 @@ const initialCardElements = [
     }
   ];
 
-initialCardElements.forEach(function (element) {
+  initialCardElements.forEach(function (element) {
     const cardElement = cardElementTemplate.cloneNode(true);
 
     cardElement.querySelector('.element__text').textContent = element.name;
     cardElement.querySelector('.element__image').src = element.link;
+
+    cardElement.querySelector('.element__like').addEventListener('click', function (event) {
+        event.target.classList.toggle('element__like_active');
+    }); 
 
     cardElementsList.prepend(cardElement);
 })
@@ -99,6 +103,9 @@ function addCardElement () {
     const cardElement = cardElementTemplate.cloneNode(true);
     cardElement.querySelector('.element__text').textContent = cardElementHeading.value;
     cardElement.querySelector('.element__image').src = cardElementPhoto.value;
+    cardElement.querySelector('.element__like').addEventListener('click', function (event) {
+        event.target.classList.toggle('element__like_active');
+    }); 
     cardElementsList.prepend(cardElement);
 }
 
@@ -112,3 +119,4 @@ function formSubmitHandlerAddCard (evt) {
 
 formElementAddCard.addEventListener('submit', formSubmitHandlerAddCard);
 
+/* Добавление лайка*/
