@@ -80,10 +80,10 @@ const closeAddCardForm = () => {
   cardAddPopup.classList.remove('popup_opened_add_card_form');
 };
 
-function addCardElements(element) {
+function addCardElements(heading, photo) {
   const newCardElement = cardTemplateElement.content.cloneNode(true);
-  newCardElement.querySelector('.element__text').textContent = element.name;
-  newCardElement.querySelector('.element__image').src = element.link;
+  newCardElement.querySelector('.element__text').textContent = heading.name;
+  newCardElement.querySelector('.element__image').src = photo.link;
   newCardElement.querySelector('.element__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__like_active');
 });
@@ -93,13 +93,15 @@ function addCardElements(element) {
 });
 
   cardListElement.prepend(newCardElement);
+  console.log(heading.name);
+  console.log(photo.link);
 };
 
 function cardFormSubmitHandler (evt) {
   evt.preventDefault();
 
-  const heading = cardInputHeadingElement.value;
-  const photo = cardInputPhotoElement.value;
+  /*heading = cardInputHeadingElement.value;
+  photo = cardInputPhotoElement.value;*/
   addCardElements(heading, photo);
   cardInputHeadingElement.value = '';
   cardInputPhotoElement.value = '';
@@ -107,8 +109,6 @@ function cardFormSubmitHandler (evt) {
 };
 
 cardInitialElements.forEach(addCardElements);
-
 cardAddOpenFormButton.addEventListener('click', openAddCardForm);
 cardAddCloseFormButton.addEventListener('click', closeAddCardForm);
-
 cardFormElement.addEventListener('submit', cardFormSubmitHandler);
