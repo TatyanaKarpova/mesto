@@ -34,89 +34,81 @@ function formSubmitHandler (evt) {
 formElement.addEventListener('submit', formSubmitHandler);
 
 
-const cardElementsList = document.querySelector('.elements__items');
-const cardElementTemplate = document.querySelector('.card-element-template').content;
+/* Вебинар */
 
-const initialCardElements = [
-    {
-      name: 'Луксор',
-      link: 'https://images.unsplash.com/photo-1657218842456-35280cac5d47?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80.jpg'
-    },
-    {
-      name: 'Агуас-Кальентес',
-      link: 'https://images.unsplash.com/photo-1415804941191-bc0c3bbac10d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80.jpg'
-    },
-    {
-      name: 'Париж',
-      link: 'https://images.unsplash.com/photo-1659891670855-a49219141f34?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80.jpg'
-    },
-    {
-      name: 'Венеция',
-      link: 'https://images.unsplash.com/photo-1656365084095-99110bc92e81?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80.jpg'
-    },
-    {
-      name: 'Невада',
-      link: 'https://images.unsplash.com/photo-1624822764351-77c42080f626?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80.jpg'
-    },
-    {
-      name: 'Скалы Севен Систерс',
-      link: 'https://images.unsplash.com/photo-1512778595306-cd1a150f561c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80.jpg'
-    }
-  ];
+const cardInitialElements = [
+  {
+    name: 'Луксор',
+    link: 'https://images.unsplash.com/photo-1657218842456-35280cac5d47?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80.jpg'
+  },
+  {
+    name: 'Агуас-Кальентес',
+    link: 'https://images.unsplash.com/photo-1415804941191-bc0c3bbac10d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80.jpg'
+  },
+  {
+    name: 'Париж',
+    link: 'https://images.unsplash.com/photo-1659891670855-a49219141f34?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80.jpg'
+  },
+  {
+    name: 'Венеция',
+    link: 'https://images.unsplash.com/photo-1656365084095-99110bc92e81?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80.jpg'
+  },
+  {
+    name: 'Невада',
+    link: 'https://images.unsplash.com/photo-1624822764351-77c42080f626?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80.jpg'
+  },
+  {
+    name: 'Скалы Севен Систерс',
+    link: 'https://images.unsplash.com/photo-1512778595306-cd1a150f561c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80.jpg'
+  }
+];
 
-  initialCardElements.forEach(function (element) {
-    const cardElement = cardElementTemplate.cloneNode(true);
-
-    cardElement.querySelector('.element__text').textContent = element.name;
-    cardElement.querySelector('.element__image').src = element.link;
-
-    cardElement.querySelector('.element__like').addEventListener('click', function (event) {
-        event.target.classList.toggle('element__like_active');
-    }); 
-
-    cardElementsList.prepend(cardElement);
-})
-
-
-const popupAddCard = document.querySelector('.popup_add_card');
-const openAddCardFormButton = document.querySelector('.profile__add-button');
-const closeAddCardFormButton = document.querySelector('.popup__close-icon_add_card');
+const cardListElement = document.querySelector('.elements__items');
+const cardFormElement = document.querySelector('.popup__form_add_card');
+const cardInputHeadingElement = cardFormElement.querySelector('.popup__item_input_card_name');
+const cardInputPhotoElement = cardFormElement.querySelector('.popup__item_input_card_photo_url');
+const cardTemplateElement = document.querySelector('.element__template');
+const cardAddPopup = document.querySelector('.popup_add_card');
+const cardAddOpenFormButton = document.querySelector('.profile__add-button');
+const cardAddCloseFormButton = document.querySelector('.popup__close-icon_add_card');
 
 const openAddCardForm = () => {
-    popupAddCard.classList.add('popup_opened_add_card_form');
+  cardAddPopup.classList.add('popup_opened_add_card_form');
 };
 
 const closeAddCardForm = () => {
-    popupAddCard.classList.remove('popup_opened_add_card_form');
+  cardAddPopup.classList.remove('popup_opened_add_card_form');
 };
 
-openAddCardFormButton.addEventListener('click', openAddCardForm);
-closeAddCardFormButton.addEventListener('click', closeAddCardForm);
+function addCardElements(element) {
+  const newCardElement = cardTemplateElement.content.cloneNode(true);
+  newCardElement.querySelector('.element__text').textContent = element.name;
+  newCardElement.querySelector('.element__image').src = element.link;
+  newCardElement.querySelector('.element__like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('element__like_active');
+});
+  newCardElement.querySelector('.element__delete-button').addEventListener('click', function (evt) {
+    const itemElement = evt.target.closest('.element');
+    itemElement.remove();
+});
 
+  cardListElement.prepend(newCardElement);
+};
 
-const formElementAddCard = document.querySelector('.popup__form_add_card');
-const cardElementHeading = document.querySelector('.popup__item_input_card_name');
-const cardElementPhoto = document.querySelector('.popup__item_input_card_photo_url');
+function cardFormSubmitHandler (evt) {
+  evt.preventDefault();
 
+  const heading = cardInputHeadingElement.value;
+  const photo = cardInputPhotoElement.value;
+  addCardElements(heading, photo);
+  cardInputHeadingElement.value = '';
+  cardInputPhotoElement.value = '';
+  closeAddCardForm();
+};
 
-function addCardElement () {
-    const cardElement = cardElementTemplate.cloneNode(true);
-    cardElement.querySelector('.element__text').textContent = cardElementHeading.value;
-    cardElement.querySelector('.element__image').src = cardElementPhoto.value;
-    cardElement.querySelector('.element__like').addEventListener('click', function (event) {
-        event.target.classList.toggle('element__like_active');
-    }); 
-    cardElementsList.prepend(cardElement);
-}
+cardInitialElements.forEach(addCardElements);
 
-function formSubmitHandlerAddCard (evt) {
-    evt.preventDefault();
-    addCardElement();
-    cardElementHeading.value = '';
-    cardElementPhoto.value = '';
-    closeAddCardForm();
-}
+cardAddOpenFormButton.addEventListener('click', openAddCardForm);
+cardAddCloseFormButton.addEventListener('click', closeAddCardForm);
 
-formElementAddCard.addEventListener('submit', formSubmitHandlerAddCard);
-
-/* Добавление лайка*/
+cardFormElement.addEventListener('submit', cardFormSubmitHandler);
