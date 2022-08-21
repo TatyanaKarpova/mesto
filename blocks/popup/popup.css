@@ -7,5 +7,7 @@
     background: rgba(0, 0, 0, 0.5);
     justify-items: center;
     align-items: center;
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
 }
