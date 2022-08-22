@@ -72,6 +72,7 @@ function addCardElements(heading, photo) {
   newCardElement.querySelector('.element__image').src = photo;
   newCardElement.querySelector('.element__like').addEventListener('click', cardLikeHandler);
   newCardElement.querySelector('.element__delete-button').addEventListener('click', cardDeleteHandler);
+  newCardElement.querySelector('.element__image').addEventListener('click', () => zoomPhotoPopup(heading, photo));
   cardListElement.prepend(newCardElement);
 };
 
@@ -79,15 +80,20 @@ cardInitialElements.forEach((element) => {
   addCardElements(element.name, element.link)
 });
 
-/*
-function zoomPhotoPopup () {
+const previewCardPhotoPopup = document.querySelector('#popup-image');
+
+function openPreviewCardPhoto () {
+  previewCardPhotoPopup.classList.add('popup_opened');
+}
+
+function zoomPhotoPopup (heading, photo) {
   let photoPopupCardElement = document.querySelector('.popup__image');
   let namePopupCardElement = document.querySelector('.popup__figcaption');
-  photoPopupCardElement.value = photo;
-  namePopupCardElement.value = heading;
+  photoPopupCardElement.src = photo;
+  namePopupCardElement.textContent = heading;
+  openPreviewCardPhoto ();
 }
-const someButton = document.querySelector('.');
-someButton.addEventListener('click', zoomPhotoPopup);*/
+
 
 
 function cardLikeHandler (evt) {
