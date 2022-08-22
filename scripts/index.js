@@ -1,5 +1,6 @@
 const popupEditProfile = document.querySelector('#popup-edit-profile');
 const popupAddCard = document.querySelector('#popup-add-card');
+const previewCardPhotoPopup = document.querySelector('#popup-image');
 const popup = document.querySelectorAll('.popup');
 const openButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelectorAll('.popup__close-icon');
@@ -10,6 +11,7 @@ closeButtonsArray.forEach(function (item) {
     closePopup.classList.remove('popup_opened');
 });
 });
+
 let formElement = document.querySelector('.popup__form');
 
 const cardInitialElements = [
@@ -70,17 +72,12 @@ function addCardElements(heading, photo) {
   const newCardElement = cardTemplateElement.content.cloneNode(true);
   newCardElement.querySelector('.element__text').textContent = heading;
   newCardElement.querySelector('.element__image').src = photo;
+  newCardElement.querySelector('.element__image').setAttribute('alt', heading);
   newCardElement.querySelector('.element__like').addEventListener('click', cardLikeHandler);
   newCardElement.querySelector('.element__delete-button').addEventListener('click', cardDeleteHandler);
   newCardElement.querySelector('.element__image').addEventListener('click', () => zoomPhotoPopup(heading, photo));
   cardListElement.prepend(newCardElement);
 };
-
-cardInitialElements.forEach((element) => {
-  addCardElements(element.name, element.link)
-});
-
-const previewCardPhotoPopup = document.querySelector('#popup-image');
 
 function openPreviewCardPhoto () {
   previewCardPhotoPopup.classList.add('popup_opened');
@@ -93,8 +90,6 @@ function zoomPhotoPopup (heading, photo) {
   namePopupCardElement.textContent = heading;
   openPreviewCardPhoto ();
 }
-
-
 
 function cardLikeHandler (evt) {
   evt.target.classList.toggle('element__like_active');
@@ -126,6 +121,9 @@ function cardFormSubmitHandler (evt) {
   popupAddCard.classList.remove('popup_opened');
 };
 
+cardInitialElements.forEach((element) => {
+  addCardElements(element.name, element.link)
+});
 
 formElement.addEventListener('submit', formSubmitHandler);
 openButton.addEventListener('click', openEditProfilePopup);
