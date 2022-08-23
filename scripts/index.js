@@ -43,8 +43,8 @@ const cardInitialElements = [
 
 const cardListElement = document.querySelector('.elements__items');
 const cardFormElement = document.querySelector('.popup__form_add_card');
-const cardInputHeadingElement = cardFormElement.querySelector('.popup__item_input_card_name');
-const cardInputPhotoElement = cardFormElement.querySelector('.popup__item_input_card_photo_url');
+const cardInputHeadingElement = cardFormElement.querySelector('.popup__item_input_card-name');
+const cardInputPhotoElement = cardFormElement.querySelector('.popup__item_input_card-photo-url');
 const cardTemplateElement = document.querySelector('.element__template');
 const cardAddOpenFormButton = document.querySelector('.profile__add-button');
 
