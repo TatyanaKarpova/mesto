@@ -111,8 +111,6 @@ function handleCardFormSubmit (evt) {
   closePopup(popupAddCard);
 };
 
-
-
 cardInitialElements.forEach((element) => {
   const cardInitialElement = createCardElement(element.name, element.link);
   cardListElement.prepend(cardInitialElement);
@@ -126,3 +124,17 @@ profileEditOpenButton.addEventListener('click', () => {
 cardAddOpenFormButton.addEventListener('click', () => openPopup(popupAddCard));
 editFormElement.addEventListener('submit', handleEditFormSubmit);
 cardFormElement.addEventListener('submit', handleCardFormSubmit);
+
+popupEditProfile.addEventListener('click', (evt) => {
+  closePopup(popupEditProfile);
+  evt.stopPropagation();
+});
+
+popupAddCard.addEventListener('click', (evt) => {
+  closePopup(popupAddCard);
+  evt.stopPropagation();
+});
+previewCardPhotoPopup.addEventListener('click', (evt) => {
+  closePopup(previewCardPhotoPopup);
+  evt.stopPropagation();
+});
