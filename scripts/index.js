@@ -23,6 +23,7 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
+
 const cardInitialElements = [
   {
     name: 'Луксор',
@@ -52,12 +53,30 @@ const cardInitialElements = [
 
 
 
+const closePopupClickOverlayHandler = (evt) => {
+  if (evt.target.classList.contains('popup_opened')) {
+    evt.target.classList.remove('popup_opened');
+  }
+};
+
+const closePopupKeydownEscHandler = (evt) => {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+};
+
 function openPopup(popups) {
   popups.classList.add('popup_opened');
+  popups.addEventListener('click', closePopupClickOverlayHandler);
+  document.addEventListener('keydown', closePopupKeydownEscHandler);
 };
+
 
 function closePopup(popups) {
   popups.classList.remove('popup_opened');
+  popups.removeEventListener('click', closePopupClickOverlayHandler);
+  document.removeEventListener('keydown', closePopupKeydownEscHandler);
 };
 
 function setEditProfileMode() {
@@ -124,17 +143,3 @@ profileEditOpenButton.addEventListener('click', () => {
 cardAddOpenFormButton.addEventListener('click', () => openPopup(popupAddCard));
 editFormElement.addEventListener('submit', handleEditFormSubmit);
 cardFormElement.addEventListener('submit', handleCardFormSubmit);
-
-popupEditProfile.addEventListener('click', (evt) => {
-  closePopup(popupEditProfile);
-  evt.stopPropagation();
-});
-
-popupAddCard.addEventListener('click', (evt) => {
-  closePopup(popupAddCard);
-  evt.stopPropagation();
-});
-previewCardPhotoPopup.addEventListener('click', (evt) => {
-  closePopup(previewCardPhotoPopup);
-  evt.stopPropagation();
-});
