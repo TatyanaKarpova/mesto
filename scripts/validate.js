@@ -35,24 +35,32 @@ const hasInvalidInput = (inputList) => {
     });
 };
 
-const toggleButtonState = (inputList, buttonElement, config) => {
+const disableButton = (buttonElement, inactiveButtonClass) => {
+    buttonElement.classList.add(inactiveButtonClass);
+    buttonElement.disabled = true;
+};
+
+const activateButton = (buttonElement, inactiveButtonClass) => {
+    buttonElement.classList.remove(inactiveButtonClass);
+    buttonElement.disabled = false;
+};
+
+const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
     if (hasInvalidInput(inputList)) {
-      buttonElement.classList.add(config.inactiveButtonClass);
-      buttonElement.disabled = true;
+        disableButton(buttonElement, inactiveButtonClass);
     } else {
-      buttonElement.classList.remove(config.inactiveButtonClass);
-      buttonElement.disabled = false;
+        activateButton(buttonElement, inactiveButtonClass);
     }
 };
 
-const setEventListeners = (formElement, config) => {
+const setEventListeners = (formElement, config, inactiveButtonClass) => {
     const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
     const buttonElement = formElement.querySelector(config.submitButtonSelector);
-    toggleButtonState(inputList, buttonElement, config);
+    toggleButtonState(inputList, buttonElement, inactiveButtonClass);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
             checkInputValidity(formElement, inputElement, config);
-            toggleButtonState(inputList, buttonElement, config);
+            toggleButtonState(inputList, buttonElement, inactiveButtonClass);
         });
     });
 };
