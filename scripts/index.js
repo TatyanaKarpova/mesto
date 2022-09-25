@@ -1,6 +1,35 @@
+import { Card } from "./Card.js";
+
+const cardInitialElements = [
+  {
+    name: 'Луксор',
+    link: 'https://images.unsplash.com/photo-1657218842456-35280cac5d47?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80.jpg'
+  },
+  {
+    name: 'Агуас-Кальентес',
+    link: 'https://images.unsplash.com/photo-1415804941191-bc0c3bbac10d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80.jpg'
+  },
+  {
+    name: 'Париж',
+    link: 'https://images.unsplash.com/photo-1659891670855-a49219141f34?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80.jpg'
+  },
+  {
+    name: 'Венеция',
+    link: 'https://images.unsplash.com/photo-1656365084095-99110bc92e81?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80.jpg'
+  },
+  {
+    name: 'Невада',
+    link: 'https://images.unsplash.com/photo-1624822764351-77c42080f626?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80.jpg'
+  },
+  {
+    name: 'Скалы Севен Систерс',
+    link: 'https://images.unsplash.com/photo-1512778595306-cd1a150f561c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80.jpg'
+  }
+];
+
 const addCardButton = document.querySelector('.popup__button_add_card');
 const editProfileButton = document.querySelector('.popup__button_edit');
-const popups = document.querySelectorAll('.popup');
+/*const popups = document.querySelectorAll('.popup');*/
 const popupEditProfile = document.querySelector('#popup-edit-profile');
 const popupAddCard = document.querySelector('#popup-add-card');
 const previewCardPhotoPopup = document.querySelector('#popup-image');
@@ -17,7 +46,7 @@ const profileEditOpenButton = document.querySelector('.profile__edit-button');
 const cardAddOpenFormButton = document.querySelector('.profile__add-button');
 const profileNameElement = document.querySelector('.profile__title');
 const profileOccupationElement = document.querySelector('.profile__subtitle');
-const cardTemplateElement = document.querySelector('.element__template');
+/*const cardTemplateElement = document.querySelector('.element__template');*/
 const cardListElement = document.querySelector('.elements__items');
 
 closeButtons.forEach((button) => {
@@ -55,6 +84,7 @@ function setEditProfileMode() {
   editInputOccupationElement.value = profileOccupationElement.textContent;
 };
 
+/*
 function createCardElement(heading, photo) {
   const cardElement = cardTemplateElement.content.cloneNode(true);
   const cardImageElement = cardElement.querySelector('.element__image');
@@ -75,13 +105,22 @@ function handleCardDelete (evt) {
   const itemElement = evt.target.closest('.element');
   itemElement.remove();
 };
+*/
+/*
+const previewCardPhoto = (card) => {
+  photoPopupCardElement.src = card._link;
+  namePopupCardElement.textContent = card._name;
+  photoPopupCardElement.setAttribute('alt', card._name);
+  openPopup(previewCardPhotoPopup);
+}*/
 
+/*
 function previewCardPhoto (heading, photo) {
   photoPopupCardElement.src = photo;
   namePopupCardElement.textContent = heading;
   photoPopupCardElement.setAttribute('alt', heading);
   openPopup(previewCardPhotoPopup);
-};
+};*/
 
 function handleEditFormSubmit (evt) {
   evt.preventDefault();
@@ -91,11 +130,17 @@ function handleEditFormSubmit (evt) {
   profileOccupationElement.textContent = editOccupationInput;
   closePopup(popupEditProfile);
 };
+// не работает
+const addCard = (cardHeading, cardPhoto) => {
+  renderElements();
+  cardListElement.prepend(renderElements(cardHeading, cardPhoto));
+}
 
+/*
 function addCard (cardHeading, cardPhoto) {
   createCardElement(cardHeading, cardPhoto);
   cardListElement.prepend(createCardElement(cardHeading, cardPhoto));
-};
+};*/
 
 function handleCardFormSubmit (evt) {
   evt.preventDefault();
@@ -106,10 +151,20 @@ function handleCardFormSubmit (evt) {
   closePopup(popupAddCard);
 };
 
+
+/*
 cardInitialElements.forEach((element) => {
   const cardInitialElement = createCardElement(element.name, element.link);
   cardListElement.prepend(cardInitialElement);
-});
+});*/
+const renderElements = () => {
+  cardInitialElements.forEach((element) => {
+    const card = new Card (element.name, element.link, '.element__template');
+    const cardElement = card.createCardElement();
+    cardListElement.prepend(cardElement);
+  })
+};
+
 
 profileEditOpenButton.addEventListener('click', () => {
   setEditProfileMode();
@@ -133,3 +188,6 @@ cardAddOpenFormButton.addEventListener('click', () => {
 
 editFormElement.addEventListener('submit', handleEditFormSubmit);
 cardFormElement.addEventListener('submit', handleCardFormSubmit);
+
+
+renderElements();
