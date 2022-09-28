@@ -1,4 +1,4 @@
-import { photoPopupCardElement, namePopupCardElement, openPopup, previewCardPhotoPopup } from './utils.js';
+import { photoPopupCardElement, namePopupCardElement, openPopup, cardPreviewPhotoPopup } from './utils.js';
 
 export const cardInitialElements = [
   {
@@ -67,11 +67,11 @@ export class Card {
     evt.target.closest('.element').remove();
   };
 
-  _handlePreviewCard() {
+  _handlePreviewCard = () => {
     photoPopupCardElement.src = this._link;
     photoPopupCardElement.setAttribute('alt', this._name);
     namePopupCardElement.textContent = this._name;
-    openPopup(previewCardPhotoPopup);
+    openPopup(cardPreviewPhotoPopup);
   };
 };
 
