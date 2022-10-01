@@ -1,7 +1,8 @@
 .element {
     border-radius: 10px;
     overflow: hidden;
-    background-color: #FFFFFF;
+    background-color: #000;
+    color: #fff;
     padding: 0;
     margin: 0;
     position: relative;

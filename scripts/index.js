@@ -1,6 +1,7 @@
-import { Card, cardInitialElements } from './Card.js';
-import { popupAddCard, openPopup, closePopup } from './utils.js';
+import { Card } from './Card.js';
+import { popupAddCard, openPopup, closePopup, photoPopupCardElement, namePopupCardElement, cardPreviewPhotoPopup } from './utils.js';
 import { FormValidator } from './FormValidator.js';
+import { cardInitialElements } from './cards.js';
 
 const validationConfig = {
   formSelector: '.popup__form',
@@ -52,24 +53,39 @@ const handleEditFormSubmit = (evt) => {
   closePopup(popupEditProfile);
 };
 
-const addCard = () => {
-  const newCard = new Card (cardInputHeadingElement.value, cardInputPhotoElement.value, '.element__template');
-  cardListElement.prepend(newCard.createCardElement());
+const handlePreviewCard = (cardName, cardLink) => {
+  photoPopupCardElement.src = cardLink;
+  photoPopupCardElement.setAttribute('alt', cardName);
+  namePopupCardElement.textContent = cardName;
+  openPopup(cardPreviewPhotoPopup);
+};
+
+const createCard = (element) => {
+  const card = new Card (element.name, element.link, '.element__template');
+  const cardElement = card.createCardElement();
+  cardListElement.prepend(cardElement);
+};
+
+const renderInitialElements = () => {
+  cardInitialElements.forEach((element) => {
+    /*const card = new Card (element.name, element.link, '.element__template', handlePreviewCard(element.name, element.link));
+    const cardElement = card.createCardElement();
+    cardListElement.prepend(cardElement);*/
+    createCard(element)
+  })
+};
+
+const addNewCard = (element) => {
+  /*const newCard = new Card (cardInputHeadingElement.value, cardInputPhotoElement.value, '.element__template', handlePreviewCard(cardInputHeadingElement.value, cardInputPhotoElement.value));
+  cardListElement.prepend(newCard.createCardElement());*/
+  createCard(element);
 };
 
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
-  addCard();
+  addNewCard(element);
   evt.target.reset();
   closePopup(popupAddCard);
-};
-
-const renderElements = () => {
-  cardInitialElements.forEach((element) => {
-    const card = new Card (element.name, element.link, '.element__template');
-    const cardElement = card.createCardElement();
-    cardListElement.prepend(cardElement);
-  })
 };
 
 profileEditOpenButton.addEventListener('click', () => {
@@ -96,4 +112,4 @@ profileEditFormElement.addEventListener('submit', handleEditFormSubmit);
 cardFormElement.addEventListener('submit', handleCardFormSubmit);
 
 
-renderElements();
+renderInitialElements();

@@ -3,9 +3,9 @@ export const namePopupCardElement = document.querySelector('.popup__figcaption')
 export const popupAddCard = document.querySelector('#popup-add-card');
 export const cardPreviewPhotoPopup = document.querySelector('#popup-image');
 
-export const openPopup = (popups) => {
-    popups.classList.add('popup_opened');
-    popups.addEventListener('click', closePopupClickOverlayHandler);
+export const openPopup = (popup) => {
+    popup.classList.add('popup_opened');
+    popup.addEventListener('click', closePopupClickOverlayHandler);
     document.addEventListener('keydown', closePopupKeydownEscHandler);
 };
 
@@ -22,8 +22,8 @@ export const closePopupKeydownEscHandler = (evt) => {
     }
 };
 
-export const closePopup = (popups) => {
-    popups.classList.remove('popup_opened');
-    popups.removeEventListener('click', closePopupClickOverlayHandler);
+export const closePopup = (popup) => {
+    popup.classList.remove('popup_opened');
+    popup.removeEventListener('click', closePopupClickOverlayHandler);
     document.removeEventListener('keydown', closePopupKeydownEscHandler);
 };
