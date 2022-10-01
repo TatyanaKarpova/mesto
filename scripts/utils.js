@@ -11,7 +11,8 @@ export const openPopup = (popup) => {
 
 export const closePopupClickOverlayHandler = (evt) => {
     if (evt.target.classList.contains('popup_opened')) {
-      evt.target.classList.remove('popup_opened');
+      const popupOpened = document.querySelector('.popup_opened');
+      closePopup(popupOpened);
     }
 };
   

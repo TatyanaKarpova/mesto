@@ -1,7 +1,7 @@
 import { Card } from './Card.js';
 import { popupAddCard, openPopup, closePopup, photoPopupCardElement, namePopupCardElement, cardPreviewPhotoPopup } from './utils.js';
 import { FormValidator } from './FormValidator.js';
-import { cardInitialElements } from './cards.js';
+import { cardInitialElements } from './initial-cards.js';
 
 const validationConfig = {
   formSelector: '.popup__form',
@@ -20,8 +20,6 @@ profileEditFormValidator.enableValidation();
 const cardAddFormValidator = new FormValidator(validationConfig, cardFormElement);
 cardAddFormValidator.enableValidation();
 
-const cardAddButton = document.querySelector('.popup__button_add_card');
-const profileEditButton = document.querySelector('.popup__button_edit');
 const popupEditProfile = document.querySelector('#popup-edit-profile');
 const buttonsClose = document.querySelectorAll('.popup__close-icon');
 const nameEditInputElement = document.querySelector('.popup__item_input_name');
@@ -61,29 +59,30 @@ const handlePreviewCard = (cardName, cardLink) => {
 };
 
 const createCard = (element) => {
-  const card = new Card (element.name, element.link, '.element__template');
+  const card = new Card (element.name, element.link, '.element__template', handlePreviewCard);
   const cardElement = card.createCardElement();
   cardListElement.prepend(cardElement);
+  return cardElement;
 };
 
 const renderInitialElements = () => {
   cardInitialElements.forEach((element) => {
-    /*const card = new Card (element.name, element.link, '.element__template', handlePreviewCard(element.name, element.link));
-    const cardElement = card.createCardElement();
-    cardListElement.prepend(cardElement);*/
-    createCard(element)
+    createCard(element);
   })
 };
 
-const addNewCard = (element) => {
-  /*const newCard = new Card (cardInputHeadingElement.value, cardInputPhotoElement.value, '.element__template', handlePreviewCard(cardInputHeadingElement.value, cardInputPhotoElement.value));
-  cardListElement.prepend(newCard.createCardElement());*/
-  createCard(element);
+const addNewCard = () => {
+  const cardInfo = {
+    name: cardInputHeadingElement.value,
+    link: cardInputPhotoElement.value
+  };
+  cardListElement.prepend(createCard(cardInfo));
 };
+
 
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
-  addNewCard(element);
+  addNewCard();
   evt.target.reset();
   closePopup(popupAddCard);
 };
@@ -91,25 +90,21 @@ const handleCardFormSubmit = (evt) => {
 profileEditOpenButton.addEventListener('click', () => {
   setEditProfileMode();
   openPopup(popupEditProfile);
-  const inputEditList = Array.from(profileEditFormElement.querySelectorAll('.popup__item'));
-  inputEditList.forEach((editProfileInputElement) => {
-    profileEditFormValidator.hideInputError(editProfileInputElement);
-  });
-  profileEditFormValidator.activateButton(profileEditButton);
+  profileEditFormValidator.resetValidationErrors();
+  profileEditFormValidator.activateButton();
 });
 
 cardAddOpenFormButton.addEventListener('click', () => {
   openPopup(popupAddCard);
   const cardAddInputList = Array.from(cardFormElement.querySelectorAll('.popup__item'));
-  cardAddInputList.forEach((cardAddInputElement) => {
-    cardAddFormValidator.hideInputError(cardAddInputElement);
+  cardAddInputList.forEach(() => {
+    cardAddFormValidator.resetValidationErrors();
   });
-  cardAddFormValidator.disableButton(cardAddButton);
+  cardAddFormValidator.disableButton();
   cardFormElement.reset();
 });
 
 profileEditFormElement.addEventListener('submit', handleEditFormSubmit);
 cardFormElement.addEventListener('submit', handleCardFormSubmit);
-
 
 renderInitialElements();
