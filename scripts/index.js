@@ -79,7 +79,6 @@ const addNewCard = () => {
   cardListElement.prepend(createCard(cardInfo));
 };
 
-
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
   addNewCard();
