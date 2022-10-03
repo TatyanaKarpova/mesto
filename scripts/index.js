@@ -61,13 +61,12 @@ const handlePreviewCard = (cardName, cardLink) => {
 const createCard = (element) => {
   const card = new Card (element.name, element.link, '.element__template', handlePreviewCard);
   const cardElement = card.createCardElement();
-  cardListElement.prepend(cardElement);
   return cardElement;
 };
 
 const renderInitialElements = () => {
   cardInitialElements.forEach((element) => {
-    createCard(element);
+    cardListElement.prepend(createCard(element));
   })
 };
 
@@ -95,10 +94,7 @@ profileEditOpenButton.addEventListener('click', () => {
 
 cardAddOpenFormButton.addEventListener('click', () => {
   openPopup(popupAddCard);
-  const cardAddInputList = Array.from(cardFormElement.querySelectorAll('.popup__item'));
-  cardAddInputList.forEach(() => {
-    cardAddFormValidator.resetValidationErrors();
-  });
+  cardAddFormValidator.resetValidationErrors();
   cardAddFormValidator.disableButton();
   cardFormElement.reset();
 });
