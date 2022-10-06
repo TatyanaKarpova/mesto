@@ -3,6 +3,14 @@ import { popupAddCard, openPopup, closePopup, photoPopupCardElement, namePopupCa
 import { FormValidator } from '../components/FormValidator.js';
 import { cardInitialElements } from '../components/initial-cards.js';
 import './index.css';
+import Section from '../components/Section.js';
+/*
+const initialCardList = new Section({
+  items: cardInitialElements,
+  renderer: (element) => {
+    const card = new Card (element.name, element.link, '.element__template', handlePreviewCard);
+  }
+}, )*/
 
 const validationConfig = {
   formSelector: '.popup__form',
