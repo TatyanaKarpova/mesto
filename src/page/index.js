@@ -1,8 +1,8 @@
-import { Card } from './Card.js';
-import { popupAddCard, openPopup, closePopup, photoPopupCardElement, namePopupCardElement, cardPreviewPhotoPopup } from './utils.js';
-import { FormValidator } from './FormValidator.js';
-import { cardInitialElements } from './initial-cards.js';
-import './page/index.css';
+import { Card } from '../components/Card.js';
+import { popupAddCard, openPopup, closePopup, photoPopupCardElement, namePopupCardElement, cardPreviewPhotoPopup } from '../components/utils.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { cardInitialElements } from '../components/initial-cards.js';
+import './index.css';
 
 const validationConfig = {
   formSelector: '.popup__form',
