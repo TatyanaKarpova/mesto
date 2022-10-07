@@ -1,16 +1,10 @@
 import { Card } from '../components/Card.js';
-import { popupAddCard, openPopup, closePopup, photoPopupCardElement, namePopupCardElement, cardPreviewPhotoPopup } from '../components/utils.js';
+import { popupAddCard, photoPopupCardElement, namePopupCardElement, cardPreviewPhotoPopup } from '../components/utils.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { cardInitialElements } from '../components/initial-cards.js';
 import './index.css';
 import Section from '../components/Section.js';
-/*
-const initialCardList = new Section({
-  items: cardInitialElements,
-  renderer: (element) => {
-    const card = new Card (element.name, element.link, '.element__template', handlePreviewCard);
-  }
-}, )*/
+import { PopupWithImage } from '../components/PopupWithImage.js';
 
 const validationConfig = {
   formSelector: '.popup__form',
@@ -60,7 +54,7 @@ const handleEditFormSubmit = (evt) => {
   closePopup(popupEditProfile);
 };
 
-const handlePreviewCard = (cardName, cardLink) => {
+const handlePreviewCard = (cardName, cardLink) => { 
   photoPopupCardElement.src = cardLink;
   photoPopupCardElement.setAttribute('alt', cardName);
   namePopupCardElement.textContent = cardName;
@@ -73,11 +67,13 @@ const createCard = (element) => {
   return cardElement;
 };
 
-const renderInitialElements = () => {
-  cardInitialElements.forEach((element) => {
-    cardListElement.prepend(createCard(element));
-  })
-};
+const initialCardList = new Section({
+  items: cardInitialElements,
+  renderer: (element) => {
+    const card = new Card (element.name, element.link, '.element__template', handlePreviewCard);
+    initialCardList.addItem(card.createCardElement());
+  }
+}, cardListElement);
 
 const addNewCard = () => {
   const cardInfo = {
@@ -111,4 +107,4 @@ cardAddOpenFormButton.addEventListener('click', () => {
 profileEditFormElement.addEventListener('submit', handleEditFormSubmit);
 cardFormElement.addEventListener('submit', handleCardFormSubmit);
 
-renderInitialElements();
+initialCardList.renderItems(cardInitialElements);
