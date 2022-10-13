@@ -44,14 +44,11 @@ cardPreviewImagePopup.setEventListeners();
 
 const handlePreviewCard = (cardName, cardLink) => { 
   cardPreviewImagePopup.openPopup(cardName, cardLink);
-  /*console.log(cardName);
-  console.log(cardLink);*/ //тут все ок
 };
 
 const createCard = (cardElementInfo) => {
   const card = new Card (cardElementInfo, '.element__template', handlePreviewCard);
   const cardElement = card.createCardElement();
-  /*console.log(cardElementInfo)*/
   return cardElement;
 };
 
@@ -66,7 +63,6 @@ initialCardList.renderItems();
 
 const handleAddCardSubmit = (newCardElement) => {
   initialCardList.addItem(createCard(newCardElement));
-  console.log(newCardElement); // тут вроде верно 
 };
 
 const popupAddCardForm = new PopupWithForm('#popup-add-card', handleAddCardSubmit);
@@ -79,14 +75,13 @@ cardAddOpenFormButton.addEventListener('click', () => {
   cardFormElement.reset();
 });
 
-const handleEditProfileSubmit = (name, occupation) => {
-  profileInfo.setUserInfo(name, occupation);
-  console.log(name, occupation);
-}
-
 const profileInfo = new UserInfo ({
   profileName: profileNameElement, 
   profileOccupation: profileOccupationElement});
+
+const handleEditProfileSubmit = (userName, userOccupation) => {
+  profileInfo.setUserInfo(userName, userOccupation);
+}
 
 const profileEditPopup = new PopupWithForm('#popup-edit-profile', handleEditProfileSubmit);
 profileEditPopup.setEventListeners();
@@ -99,8 +94,7 @@ profileEditOpenButton.addEventListener('click', () => {
 });
 
 const setEditProfileMode = () => {
-  const userInfo = profileInfo.getUserInfo();
-  nameEditInputElement.value = userInfo.userName;
-  occupationEditInputElement.value = userInfo.userOccupation;
-  console.log(userInfo.userName)
+  const userData = profileInfo.getUserInfo();
+  nameEditInputElement.value = userData.name;
+  occupationEditInputElement.value = userData.occupation;
 };
