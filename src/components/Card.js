@@ -1,7 +1,7 @@
-export class Card {
-  constructor(name, link, templateSelector, handlePreviewCard) {
-    this._name = name;
-    this._link = link;
+export default class Card {
+  constructor(cardElementInfo, templateSelector, handlePreviewCard) {
+    this._name = cardElementInfo.name;
+    this._link = cardElementInfo.link;
     this._templateSelector = templateSelector;
     this._handlePreviewCard = handlePreviewCard;
   }
@@ -20,16 +20,16 @@ export class Card {
     this._element = this._getCardTemplate();
 
     this._cardImageElement = this._element.querySelector('.element__image');
+    this._cardNameElement = this._element.querySelector('.element__text');
     this._cardImageElement.src = this._link;
     this._cardImageElement.alt = this._name;
-    this._element.querySelector('.element__text').textContent = this._name;
+    this._cardNameElement.textContent = this._name;
 
     this._element.querySelector('.element__like').addEventListener('click', this._handleCardLike);
     this._element.querySelector('.element__delete-button').addEventListener('click', this._handleCardDelete);
     this._cardImageElement.addEventListener('click', () => {
       this._handlePreviewCard(this._name, this._link);
     });
-
     return this._element;
   };
 
