@@ -24,12 +24,11 @@ export default class Card {
     this._cardImageElement.src = this._link;
     this._cardImageElement.alt = this._name;
     this._cardNameElement.textContent = this._name;
+    this._likeButton = this._element.querySelector('.element__like');
+    this._deleteButton = this._element.querySelector('.element__delete-button');
+    
+    this._setEventListeners();
 
-    this._element.querySelector('.element__like').addEventListener('click', this._handleCardLike);
-    this._element.querySelector('.element__delete-button').addEventListener('click', this._handleCardDelete);
-    this._cardImageElement.addEventListener('click', () => {
-      this._handlePreviewCard(this._name, this._link);
-    });
     return this._element;
   };
 
@@ -40,5 +39,13 @@ export default class Card {
   _handleCardDelete = () => {
     this._element.remove();
   };
+
+  _setEventListeners() {
+    this._likeButton.addEventListener('click', this._handleCardLike);
+    this._deleteButton.addEventListener('click', this._handleCardDelete);
+    this._cardImageElement.addEventListener('click', () => {
+      this._handlePreviewCard(this._name, this._link);
+    });
+  }
 };
 

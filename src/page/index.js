@@ -60,14 +60,12 @@ addCardPopup.setEventListeners();
 cardAddOpenFormButton.addEventListener('click', () => {
   addCardPopup.openPopup();
   cardAddFormValidator.resetValidationErrors();
-  cardAddFormValidator.disableButton();
-  cardFormElement.reset();
 });
 
 
 const profileInfo = new UserInfo({
-  profileNameSelector: profileNameElement, 
-  profileOccupationSelector: profileOccupationElement});
+  profileName: profileNameElement, 
+  profileOccupation: profileOccupationElement});
 
 const handleEditProfileSubmit = (userName, userOccupation) => {
   profileInfo.setUserInfo(userName, userOccupation);
@@ -87,5 +85,4 @@ profileEditOpenButton.addEventListener('click', () => {
   profileEditPopup.openPopup();
   setEditProfileMode();
   profileEditFormValidator.resetValidationErrors();
-  profileEditFormValidator.activateButton();
 });
