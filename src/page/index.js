@@ -27,6 +27,7 @@ profileEditFormValidator.enableValidation();
 const cardAddFormValidator = new FormValidator(validationConfig, cardFormElement);
 cardAddFormValidator.enableValidation();
 
+/*
 const API_OPTIONS = {
   url: 'https://mesto.nomoreparties.co/v1/cohort-52/',
   headers: {
@@ -35,7 +36,7 @@ const API_OPTIONS = {
   }
 }
 
-const api = new Api(API_OPTIONS);
+const api = new Api(API_OPTIONS);*/
 
 const cardPreviewImagePopup = new PopupWithImage('#popup-image');
 cardPreviewImagePopup.setEventListeners();

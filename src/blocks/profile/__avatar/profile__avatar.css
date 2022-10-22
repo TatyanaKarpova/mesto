@@ -5,6 +5,14 @@
     justify-self: start;
     object-fit: cover;
     object-position: 50% 50%;
+    position: relative;
+    z-index: 2;
+}
+
+.profile__avatar:hover {
+    cursor: pointer;
+    opacity: 0.2;
+    z-index: 0;
 }
 
 @media screen and (max-width: 1024px) {
