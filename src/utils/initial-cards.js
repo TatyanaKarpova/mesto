@@ -1,4 +1,4 @@
-export const cardInitialElements = [
+/*export const cardInitialElements = [
     {
       name: 'Луксор',
       link: 'https://images.unsplash.com/photo-1657218842456-35280cac5d47?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80.jpg'
@@ -23,4 +23,4 @@ export const cardInitialElements = [
       name: 'Скалы Севен Систерс',
       link: 'https://images.unsplash.com/photo-1512778595306-cd1a150f561c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80.jpg'
     }
-  ];
+  ];*/
