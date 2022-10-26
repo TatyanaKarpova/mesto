@@ -1,21 +1,18 @@
-class Api {
-    constructor(config) {
-        this._url = config.url;
-        this._headers = config.headers;
+export default class Api {
+    constructor({url, headers}) {
+        this._url = url;
+        this._headers = headers;
     }
 
     _checkResponse(response) {
-        if (response.ok) {
-            return response.json();
-        }
-        return Promise.reject(`Ошибка: ${response.status}`);
+        return response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`);
     }
 
     getUserProfileInfo() {
-        return fetch(`${this._url}users/me`, {
+        return fetch(`${this._url}/users/me`, {
             headers: this._headers
         })
-        .then(response => this._checkResponse(response));
+        .then(this._checkResponse);
     }
 
     getInitialCards() {
@@ -25,13 +22,13 @@ class Api {
         .then(response => this._checkResponse(response));
     }
 
-    editProfileInfo(name, occupation) {
+    editProfileInfo(obj) {
         return fetch(`${this._url}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                name: name,
-                about: occupation
+                name: obj.name,
+                about: obj.occupation
               })
         })
         .then(response => this._checkResponse(response));
@@ -49,16 +46,16 @@ class Api {
         .then(response => this._checkResponse(response));
     }
 
-    likeCard(id) {
-        return fetch(`${this._url}/cards/${id}/likes`, {
+    likeCard(obj) {
+        return fetch(`${this._url}/cards/${obj._id}/likes`, {
             method: 'PUT',
             headers: this._headers
         })
         .then(response => this._checkResponse(response));
     }
 
-    dislikeCard(id) {
-        return fetch(`${this._url}/cards/${id}/likes`, {
+    removeLikeCard(obj) {
+        return fetch(`${this._url}/cards/${obj._id}/likes`, {
             method: 'DELETE',
             headers: this._headers
         })
