@@ -5,7 +5,7 @@
     line-height: 48px;
     grid-area: title;
     align-self: end;
-    text-align: center;
+    text-align: start;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
