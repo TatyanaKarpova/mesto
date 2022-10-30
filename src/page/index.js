@@ -16,14 +16,15 @@ import {
   profileUpdateAvatarOpenButton
 } from '../utils/constants.js'; 
 
-import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
-import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
+
 
 const profileEditFormValidator = new FormValidator(validationConfig, profileEditFormElement);
 profileEditFormValidator.enableValidation();
@@ -31,6 +32,7 @@ const cardAddFormValidator = new FormValidator(validationConfig, cardFormElement
 cardAddFormValidator.enableValidation();
 const profileUpdateAvatarFormValidator = new FormValidator(validationConfig, profileUpdateAvatarFormElement);
 profileUpdateAvatarFormValidator.enableValidation();
+
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-52/',
@@ -56,24 +58,24 @@ const createCard = (cardElementInfo) => {
   }, 
   '.element__template', 
   handlePreviewCard,
-  () => confirmationPopup.openPopup(card),
+  () => confirmDeleteCardPopup.openPopup(card),
   () => {
     return api
-    .likeCard(cardElementInfo)
-    .then((response) => {
-      card.setLikesCount(response);
-      card.addLike();
-    })
-    .catch((err) => console.log(err))
+      .likeCard(cardElementInfo)
+      .then((response) => {
+        card.setLikesCount(response);
+        card.addLike();
+      })
+      .catch((err) => console.log(err))
   },
   () => {
     return api
-    .removeLikeCard(cardElementInfo)
-    .then((response) => {
-      card.setLikesCount(response);
-      card.removeLike();
-    })
-    .catch((err) => console.log(err))
+      .removeLikeCard(cardElementInfo)
+      .then((response) => {
+        card.setLikesCount(response);
+        card.removeLike();
+      })
+      .catch((err) => console.log(err))
   }
   )
   const cardElement = card.createCardElement();
@@ -84,12 +86,13 @@ const createCard = (cardElementInfo) => {
 let userId;
 
 Promise.all([api.getInitialCards(), api.getUserProfileInfo()])
-  .then((value) => {
-    userId = value[1]._id;
-    initialCardList.renderItems(value[0]);
-    profileInfo.setUserInfo(value[1]);
+  .then(([cardElements, userInfo]) => {
+    userId = userInfo._id;
+    initialCardList.renderItems(cardElements);
+    profileInfo.setUserInfo(userInfo);
   })
   .catch((err) => console.log(err));
+
 
 const initialCardList = new Section({
     renderer: (initialCardElement) => {
@@ -97,19 +100,20 @@ const initialCardList = new Section({
     }
 }, cardListElement);
 
+
 const handleAddCardSubmit = (newCardElement) => {
-  addCardPopup.handleSubmitButtonText(true);
+  cardAddPopup.handleSubmitButtonText(true);
   return api
     .addNewCards(newCardElement.name, newCardElement.link)
     .then((card) => {
       initialCardList.addItem(createCard(card));
-      addCardPopup.closePopup();
+      cardAddPopup.closePopup();
     })
     .catch((err) => console.log(err));
 };
 
-const addCardPopup = new PopupWithForm('#popup-add-card', handleAddCardSubmit);
-addCardPopup.setEventListeners();
+const cardAddPopup = new PopupWithForm('#popup-add-card', handleAddCardSubmit);
+cardAddPopup.setEventListeners();
 
 
 const cardPreviewImagePopup = new PopupWithImage('#popup-image');
@@ -141,12 +145,12 @@ profileEditPopup.setEventListeners();
 const handleUpdateAvatarSubmit = (url) => {
   profileUpdateAvatarPopup.handleSubmitButtonText(true);
   return api
-  .updateAvatar(url)
-  .then((link) => {
-    profileInfo.setUserInfo(link);
-    profileUpdateAvatarPopup.closePopup();
-  })
-  .catch((err) => console.log(err));
+    .updateAvatar(url)
+    .then((link) => {
+      profileInfo.setUserInfo(link);
+      profileUpdateAvatarPopup.closePopup();
+    })
+    .catch((err) => console.log(err));
 }
 
 const profileUpdateAvatarPopup = new PopupWithForm('#popup-avatar-update', handleUpdateAvatarSubmit);
@@ -158,13 +162,13 @@ const handleFormSubmitDeleteCard = (card) => {
     .deleteCard(card._cardId)
     .then(() => {
       card.deleteCard();
-      confirmationPopup.closePopup();
+      confirmDeleteCardPopup.closePopup();
     })
-  .catch((err) => console.log(err));
+    .catch((err) => console.log(err));
 }
 
-const confirmationPopup = new PopupWithConfirmation('#popup-confirm', handleFormSubmitDeleteCard);
-confirmationPopup.setEventListeners();
+const confirmDeleteCardPopup = new PopupWithConfirmation('#popup-confirm', handleFormSubmitDeleteCard);
+confirmDeleteCardPopup.setEventListeners();
 
 
 const setEditProfileMode = () => {
@@ -182,9 +186,9 @@ profileEditOpenButton.addEventListener('click', () => {
 });
 
 cardAddOpenFormButton.addEventListener('click', () => {
-  addCardPopup.openPopup();
+  cardAddPopup.openPopup();
   cardAddFormValidator.resetValidationErrors();
-  addCardPopup.handleSubmitButtonText(false);
+  cardAddPopup.handleSubmitButtonText(false);
 });
 
 profileUpdateAvatarOpenButton.addEventListener('click', () => {
