@@ -45,7 +45,7 @@
                     <span class="error" id="name-error"></span>
                 </label>
                 <label class="popup__form-field">
-                    <input type="text" id="occupation" name="occupation" value="Исследователь океана" placeholder="О себе" class="popup__item popup__item_input_occupation" required minlength="2" maxlength="200">
+                    <input type="text" id="occupation" name="about" value="Исследователь океана" placeholder="О себе" class="popup__item popup__item_input_occupation" required minlength="2" maxlength="200">
                     <span class="error" id="occupation-error"></span>
                 </label>
                 <button type="submit" class="popup__button popup__button_edit">Сохранить</button>
@@ -83,8 +83,10 @@
     <div class="popup popup-confirm" id="popup-confirm">
         <div class="popup__container">
             <h2 class="popup__heading popup__heading_confirm">Вы уверены?</h2>
-            <button type="button" class="popup__button popup__button_confirm">Да</button>
             <button type="button" id="button-delete-card" class="popup__close-icon" aria-label="Закрыть попап"></button>
+            <form name="popup-form-delete-card" class="popup__form popup__form_delete-card" novalidate>
+                <button type="submit" class="popup__button popup__button_confirm">Да</button>
+            </form>
         </div>
     </div>
 

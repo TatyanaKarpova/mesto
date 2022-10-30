@@ -9,33 +9,36 @@ export default class Api {
     }
 
     getUserProfileInfo() {
-        return fetch(`${this._url}/users/me`, {
+        this._userProfileInfo = fetch(`${this._url}/users/me`, {
             headers: this._headers
         })
-        .then(this._checkResponse);
+        .then(response => this._checkResponse(response));
+        return this._userProfileInfo;
     }
 
     getInitialCards() {
-        return fetch(`${this._url}/cards`, {
+        this._initialCards = fetch(`${this._url}/cards`, {
             headers: this._headers
         })
         .then(response => this._checkResponse(response));
+        return this._initialCards;
     }
 
-    editProfileInfo(obj) {
-        return fetch(`${this._url}/users/me`, {
+    editProfileInfo(data) {
+        this._editedProfileInfo = fetch(`${this._url}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                name: obj.name,
-                about: obj.occupation
+                name: data.name,
+                about: data.about
               })
         })
         .then(response => this._checkResponse(response));
+        return this._editedProfileInfo;
     }
 
     addNewCards(name, link) {
-        return fetch(`${this._url}/cards`, {
+        this._newCards = fetch(`${this._url}/cards`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
@@ -44,40 +47,46 @@ export default class Api {
               })
         })
         .then(response => this._checkResponse(response));
+        return this._newCards;
     }
 
-    likeCard(obj) {
-        return fetch(`${this._url}/cards/${obj._id}/likes`, {
+    likeCard(like) {
+        this._addedLike = fetch(`${this._url}/cards/${like._id}/likes`, {
             method: 'PUT',
             headers: this._headers
         })
         .then(response => this._checkResponse(response));
+        return this._addedLike;
     }
 
-    removeLikeCard(obj) {
-        return fetch(`${this._url}/cards/${obj._id}/likes`, {
+    removeLikeCard(like) {
+        this._removedLike = fetch(`${this._url}/cards/${like._id}/likes`, {
             method: 'DELETE',
             headers: this._headers
         })
         .then(response => this._checkResponse(response));
+        return this._removedLike;
     }
 
     deleteCard(id) {
-        return fetch(`${this._url}/cards/${id}`, {
+        this._deletedCard = fetch(`${this._url}/cards/${id}`, {
             method: 'DELETE',
             headers: this._headers
         })
         .then(response => this._checkResponse(response));
+        return this._deletedCard;
     }
 
-    updateAvatar(url) {
-        return fetch(`${this._url}/users/me/avatar`, {
+    updateAvatar(data) {
+        this._updatedAvatar = fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                avatar: url
+                avatar: data.avatar
               })
         })
         .then(response => this._checkResponse(response));
+        return this._updatedAvatar;
     }
+
 }
