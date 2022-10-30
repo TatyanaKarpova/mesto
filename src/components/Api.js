@@ -5,7 +5,10 @@ export default class Api {
     }
 
     _checkResponse(response) {
-        return response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`);
+        if (response.ok ) {
+            return response.json();
+        }
+        return Promise.reject(`Ошибка: ${response.status}`);
     }
 
     getUserProfileInfo() {
@@ -24,13 +27,13 @@ export default class Api {
         return this._initialCards;
     }
 
-    editProfileInfo(data) {
+    editProfileInfo(profileInfo) {
         this._editedProfileInfo = fetch(`${this._url}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                name: data.name,
-                about: data.about
+                name: profileInfo.name,
+                about: profileInfo.about
               })
         })
         .then(response => this._checkResponse(response));
@@ -77,12 +80,12 @@ export default class Api {
         return this._deletedCard;
     }
 
-    updateAvatar(data) {
+    updateAvatar(imageLink) {
         this._updatedAvatar = fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                avatar: data.avatar
+                avatar: imageLink.avatar
               })
         })
         .then(response => this._checkResponse(response));
