@@ -1,11 +1,12 @@
 export default class Card {
   constructor(
-    cardElementInfo, 
-    templateSelector, 
-    handlePreviewCard, 
-    handleDeleteCard, 
-    handleAddLike, 
-    handleRemoveLike) {
+    cardElementInfo,
+    templateSelector,
+    handlePreviewCard,
+    handleDeleteCard,
+    handleAddLike,
+    handleRemoveLike
+  ) {
     this._name = cardElementInfo.name;
     this._link = cardElementInfo.link;
     this._templateSelector = templateSelector;
@@ -22,61 +23,59 @@ export default class Card {
   _getCardTemplate() {
     const cardElement = document
       .querySelector(this._templateSelector)
-      .content
-      .querySelector('.element')
+      .content.querySelector(".element")
       .cloneNode(true);
 
-      return cardElement;
-  };
-  
+    return cardElement;
+  }
+
   createCardElement() {
     this._element = this._getCardTemplate();
 
-    this._cardImageElement = this._element.querySelector('.element__image'); //
-    this._cardNameElement = this._element.querySelector('.element__text');
-    this._likesCounter = this._element.querySelector('.element__like-number');
-    this._likeButton = this._element.querySelector('.element__like');
-    this._deleteButton = this._element.querySelector('.element__delete-button');
-
+    this._cardImageElement = this._element.querySelector(".element__image"); //
+    this._cardNameElement = this._element.querySelector(".element__text");
+    this._likesCounter = this._element.querySelector(".element__like-number");
+    this._likeButton = this._element.querySelector(".element__like");
+    this._deleteButton = this._element.querySelector(".element__delete-button");
 
     this._cardImageElement.src = this._link;
     this._cardImageElement.alt = this._name;
     this._cardNameElement.textContent = this._name;
-    this._likesCounter.textContent = `${this._likes.length}`;
-    
-    this._setEventListeners(); 
-    this._handleCardLikeState();
-    this._checkId();
+    this._likesCounter.textContent = this._likes.length;
+
+    this._setEventListeners();
+    this._checkIsLiked();
+    this._checkIsOwn();
 
     return this._element;
-  };
+  }
 
-  _checkId() {
+  _checkIsOwn() {
     if (this._userId !== this._ownerId) {
       this._deleteButton.remove();
     }
   }
 
-  _handleCardLikeState() {
-      this._likes.forEach((user) => {
-        if (user._id === this._userId) {
-          this.addLike();
-        } else {
-          this.removeLike();
-        }
-      });
-  };
+  _checkIsLiked() {
+    this._likes.forEach((user) => {
+      if (user._id === this._userId) {
+        this.addLike();
+      } else {
+        this.removeLike();
+      }
+    });
+  }
 
   addLike() {
-    this._likeButton.classList.add('element__like_active');
- ; }
+    this._likeButton.classList.add("element__like_active");
+  }
 
   removeLike() {
-    this._likeButton.classList.remove('element__like_active');
-  };
+    this._likeButton.classList.remove("element__like_active");
+  }
 
-  setLikesCount(res) {
-    this._likesCounter.textContent = `${res.likes.length}`;
+  setLikesCount(likesCount) {
+    this._likesCounter.textContent = likesCount.likes.length;
   }
 
   deleteCard() {
@@ -84,22 +83,25 @@ export default class Card {
     this._element = null;
   }
 
+  _handleLikeCard() {
+    if (this._likeButton.classList.contains("element__like_active")) {
+      this._handleRemoveLike();
+    } else {
+      this._handleAddLike();
+    }
+  }
+
   _setEventListeners() {
-    this._likeButton.addEventListener('click', () => {
-      if (this._likeButton.classList.contains('element__like_active')) {
-        this._handleRemoveLike();
-      } else {
-        this._handleAddLike();
-      }
+    this._likeButton.addEventListener("click", () => {
+      this._handleLikeCard();
     });
 
-    this._deleteButton.addEventListener('click', () => {
+    this._deleteButton.addEventListener("click", () => {
       this._handleDeleteCard(this);
     });
 
-    this._cardImageElement.addEventListener('click', () => {
+    this._cardImageElement.addEventListener("click", () => {
       this._handlePreviewCard(this._name, this._link);
     });
   }
-};
-
+}
