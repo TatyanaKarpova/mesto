@@ -74,8 +74,8 @@ export default class Card {
     this._likeButton.classList.remove("element__like_active");
   }
 
-  setLikesCount(likesCount) {
-    this._likesCounter.textContent = likesCount.likes.length;
+  setLikesCount(likes) {
+    this._likesCounter.textContent = likes.likes.length;
   }
 
   deleteCard() {

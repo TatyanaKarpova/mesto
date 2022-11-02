@@ -69,8 +69,8 @@ const createCard = (cardElementInfo) => {
     () => {
       return api
         .likeCard(cardElementInfo)
-        .then((likesCount) => {
-          card.setLikesCount(likesCount);
+        .then((likes) => {
+          card.setLikesCount(likes);
           card.addLike();
         })
         .catch((err) => console.log(err));
@@ -78,8 +78,8 @@ const createCard = (cardElementInfo) => {
     () => {
       return api
         .removeLikeCard(cardElementInfo)
-        .then((likesCount) => {
-          card.setLikesCount(likesCount);
+        .then((likes) => {
+          card.setLikesCount(likes);
           card.removeLike();
         })
         .catch((err) => console.log(err));
@@ -113,7 +113,7 @@ const handleAddCardSubmit = (cardData) => {
   return api
     .addNewCards(cardData.name, cardData.link)
     .then((card) => {
-      cardsSection.addItem(createCard(card));
+      cardsSection.addItemUp(createCard(card));
       cardAddPopup.closePopup();
     })
     .catch((err) => console.log(err))
